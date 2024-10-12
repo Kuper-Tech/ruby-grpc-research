@@ -1,0 +1,86 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.2)
+    bigdecimal (3.1.8)
+    ds9 (1.4.2)
+      mini_portile2 (>= 2.2.0)
+    google-protobuf (4.28.2)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.28.2-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.28.2-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.28.2-x86-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.28.2-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.28.2-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
+    googleapis-common-protos-types (1.16.0)
+      google-protobuf (>= 3.18, < 5.a)
+    griffin (0.3.0)
+      grpc_kit (>= 0.5.0)
+      serverengine (~> 2.0.7)
+    grpc-tools (1.66.0)
+    grpc_kit (0.5.1)
+      ds9 (>= 1.4.0)
+      google-protobuf (>= 3.7.0)
+      googleapis-common-protos-types (>= 1.0.2)
+    json (2.7.2)
+    language_server-protocol (3.17.0.3)
+    mini_portile2 (2.8.7)
+    parallel (1.26.3)
+    parser (3.3.4.2)
+      ast (~> 2.4.1)
+      racc
+    racc (1.8.1)
+    rainbow (3.1.1)
+    rake (13.2.1)
+    regexp_parser (2.9.2)
+    rexml (3.3.6)
+      strscan
+    rubocop (1.65.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.4, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.32.1)
+      parser (>= 3.3.1.0)
+    ruby-progressbar (1.13.0)
+    serverengine (2.0.7)
+      sigdump (~> 0.2.2)
+    sigdump (0.2.5)
+    strscan (3.1.0)
+    unicode-display_width (2.5.0)
+
+PLATFORMS
+  aarch64-linux
+  arm64-darwin
+  ruby
+  x86-linux
+  x86_64-darwin
+  x86_64-linux
+
+DEPENDENCIES
+  griffin
+  grpc-tools
+  rubocop
+
+RUBY VERSION
+   ruby 3.3.4p94
+
+BUNDLED WITH
+   2.5.15
