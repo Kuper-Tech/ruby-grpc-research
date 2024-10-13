@@ -5,8 +5,13 @@ const client = new grpc.Client();
 client.load(['proto'], 'hello.proto');
 
 export const options = {
-  vus: 10,
-  duration: '30s',
+  stages: [
+    { duration: '30s', target: 1000 },
+    { duration: '10s', target: 1000 },
+    { duration: '10s', target: 750 },
+    { duration: '10s', target: 500 },
+    { duration: '10s', target: 0 },
+  ],
 };
 
 export default () => {
