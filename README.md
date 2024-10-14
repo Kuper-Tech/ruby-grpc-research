@@ -7,6 +7,13 @@ DS9_USE_SYSTEM_LIBRARIES=true bundle install
 ruby griffin/server.rb
 ```
 
+## Gruf
+
+```shell
+bundle install
+ruby gruf/server.rb
+```
+
 ## k6
 
 ```shell
