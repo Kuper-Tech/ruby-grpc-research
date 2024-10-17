@@ -10,7 +10,7 @@ class GreeterServer < Hello::Greeter::Service
 end
 
 Griffin::Server.configure do |c|
-  c.bind '127.0.0.1'
+  c.bind '0.0.0.0'
   c.port 50_051
 
   c.workers 8

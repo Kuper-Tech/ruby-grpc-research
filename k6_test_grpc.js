@@ -15,7 +15,7 @@ export const options = {
 };
 
 export default () => {
-  client.connect('localhost:50051', { plaintext: true });
+  client.connect('srv.lan:50051', { plaintext: true });
 
   const data = { name: 'k6' };
   const response = client.invoke('hello.Greeter/SayHello', data);

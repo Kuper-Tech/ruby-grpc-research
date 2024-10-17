@@ -4,7 +4,7 @@ require 'gruf'
 require_relative '../pb/hello_services_pb'
 
 Gruf.configure do |c|
-  c.server_binding_url = '127.0.0.1:50051'
+  c.server_binding_url = '0.0.0.0:50051'
   c.event_listener_proc = lambda do |event|
     case event
     when :thread_pool_exhausted
