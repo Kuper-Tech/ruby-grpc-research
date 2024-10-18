@@ -11,9 +11,10 @@ end
 
 Griffin::Server.configure do |c|
   c.bind '0.0.0.0'
-  c.port 50_051
+  c.port 9091
 
-  c.workers 8
+  # runs in single mode
+  c.workers 1
   c.pool_size 20, 20
   c.connection_size 4, 4
 
