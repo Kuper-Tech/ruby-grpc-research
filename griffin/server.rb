@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require 'grpc_kit'
 require 'griffin'
 require_relative '../pb/hello_services_pb'
 
 class GreeterServer < Hello::Greeter::Service
+  include GrpcKit::Grpc::GenericService
+
   def say_hello(request, _call)
     Hello::HelloReply.new(message: "Hello, #{request.name}!")
   end

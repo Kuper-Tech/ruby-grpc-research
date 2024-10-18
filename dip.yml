@@ -1,0 +1,43 @@
+version: '7'
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  k6:
+    service: k6
+    subcommands:
+      gruf:
+        command: run /app/k6_test_grpc.js --env TARGET_HOST="gruf"
+      rust-tonic:
+        command: run /app/k6_test_grpc.js --env TARGET_HOST="rust-tonic"
+
+  grpcurl:
+    service: grpcurl
+    subcommands:
+      gruf:
+        command:  >
+          -plaintext -proto hello.proto -import-path /app/proto -d '{"name": "Dmitry"}'  gruf:9001 hello.Greeter/SayHello
+      rust-tonic:
+        command:  >
+          -plaintext -proto hello.proto -import-path /app/proto -d '{"name": "Dmitry"}'  rust-tonic:9001 hello.Greeter/SayHello
+
+  gruf:
+    command: bundle exec ruby gruf/server.rb
+  griffin:
+    command:  bundle exec ruby griffin/server.rb
+
+  rust-tonic:
+    service: rust-tonic
+    command: cargo run
+
+provision:
+  - dip compose down --volumes --remove-orphans
+
+  #- rm -f Gemfile.lock
+  - dip compose run ruby bundle install 
+
+  #- rm -f Cargo.lock
+  # - dip compose run rust-tonic cargo fetch
+
