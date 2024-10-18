@@ -1,5 +1,21 @@
 # Ruby Grpc Research
 
+## Docker Compose
+
+```
+# provision
+docker-compose run gruf bundle install
+
+# run gruf
+docker-compose up gruf -d
+
+# check GRPC server with grpcurl
+docker-compose run grpcurl_gruf
+
+# k6 gruf server
+docker-compose run k6_gruf
+```
+
 ## Griffin
 
 ```shell
