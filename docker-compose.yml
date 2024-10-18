@@ -1,7 +1,9 @@
-x-app-service-template: &app
-  image: ruby:3.3
+x-app-service-template: &ruby-app
+  image: ruby-with-nghttp2:0.1
+  build:
+    dockerfile: Dockerfile
   environment:
-    DS9_USE_SYSTEM_LIBRARIES: 1
+    DS9_USE_SYSTEM_LIBRARIES: "1"
     HISTFILE: /app/tmp/.bash_history
     BUNDLE_PATH: /usr/local/bundle
     BUNDLE_CONFIG: /app/.bundle/config
@@ -16,14 +18,12 @@ x-app-service-template: &app
 
 services:
   ruby:
-    <<: *app
+    <<: *ruby-app
     command: bash
 
   gruf:
-    <<: *app
+    <<: *ruby-app
     command: bundle exec ruby gruf/server.rb
-    ports:
-      - "9001:9001"
     deploy:
       resources:
         limits:
@@ -31,25 +31,36 @@ services:
           memory: 50M
 
   griffin:
-    <<: *app
+    <<: *ruby-app
     command:  bundle exec ruby griffin/server.rb
-    #    ports:
-    #    #  - "9001:9001"
 
-  k6_gruf:
+  k6:
     image: grafana/k6
     command: run /app/k6_test_grpc.js
-    environment:
-      TARGET_HOST: "gruf"
     volumes:
       - .:/app:cached
 
-  grpcurl_gruf:
+  grpcurl:
     image: fullstorydev/grpcurl
     volumes:
       - .:/app:cached
     command: >
       -plaintext -proto hello.proto -import-path /app/proto -d '{"name": "Dmitry"}'  gruf:9001 hello.Greeter/SayHello
 
+  rust-tonic:
+    image: rust-with-protobuf:0.2
+    build:
+      dockerfile: rust-tonic/Dockerfile
+    working_dir: /app/rust-tonic
+    environment:
+      CARGO_HOME: /usr/cargo
+    volumes:
+      - .:/app:cached
+      - cargo_data:/usr/cargo
+ 
+    command: >
+      cargo run
+ 
 volumes:
   bundler_data:
+  cargo_data:
