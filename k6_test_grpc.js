@@ -2,7 +2,7 @@ import grpc from 'k6/net/grpc';
 import { check, sleep } from 'k6';
 
 const client = new grpc.Client();
-client.load(['proto'], 'hello.proto');
+client.load(['shared/proto'], 'hello.proto');
 
 export const options = {
   stages: [
@@ -15,7 +15,7 @@ export const options = {
 };
 
 export default () => {
-  client.connect(__ENV.TARGET_HOST + ":9001", { plaintext: true });
+  client.connect(__ENV.TARGET_HOST + ":9091", { plaintext: true });
 
   const data = { name: 'k6' };
   const response = client.invoke('hello.Greeter/SayHello', data);

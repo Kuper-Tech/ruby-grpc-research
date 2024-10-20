@@ -2,7 +2,7 @@
 
 require 'grpc'
 require 'logger'
-require_relative '../pb/hello_services_pb'
+require_relative '../shared/pb/hello_services_pb'
 
 THREADS_COUNT = 5
 WAIT_QUEUE_SIZE = 32

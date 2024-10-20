@@ -2,7 +2,7 @@
 
 require 'grpc_kit'
 require 'griffin'
-require_relative '../pb/hello_services_pb'
+require_relative '../shared/pb/hello_services_pb'
 
 class GreeterServer < Hello::Greeter::Service
   include GrpcKit::Grpc::GenericService
