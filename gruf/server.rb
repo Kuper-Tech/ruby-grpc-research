@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'gruf'
-require_relative '../pb/hello_services_pb'
+require_relative '../shared/pb/hello_services_pb'
 
 Gruf.configure do |c|
-  #  c.server_binding_url = '0.0.0.0:9091'
+  c.server_binding_url = '0.0.0.0:9091'
   c.event_listener_proc = lambda do |event|
     case event
     when :thread_pool_exhausted

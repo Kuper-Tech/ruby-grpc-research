@@ -3,7 +3,7 @@
 require 'grpc'
 require 'logger'
 require 'socket'
-require_relative '../pb/hello_services_pb'
+require_relative '../shared/pb/hello_services_pb'
 
 PROCESSES_COUNT = 3
 THREADS_COUNT = 5
@@ -34,7 +34,8 @@ end
 socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM)
 socket_addr = Socket.pack_sockaddr_in(BIND_PORT, BIND_IP)
 socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEPORT, true)
-fail "Socket port is not reusable" unless socket.getsockopt(:SOCKET, :REUSEPORT).bool
+raise 'Socket port is not reusable' unless socket.getsockopt(:SOCKET, :REUSEPORT).bool
+
 socket.bind(socket_addr)
 
 PROCESSES_COUNT.times do
@@ -42,7 +43,7 @@ PROCESSES_COUNT.times do
     server = GRPC::RpcServer.new(
       pool_size: THREADS_COUNT,
       max_waiting_requests: WAIT_QUEUE_SIZE,
-      server_args: {'grpc.so_reuseport' => 1}
+      server_args: { 'grpc.so_reuseport' => 1 }
     )
     server.add_http2_port(BIND_ADDRESS, :this_port_is_insecure)
     server.handle(HelloImpl)
@@ -55,6 +56,6 @@ begin
   puts "Waiting for all sub-processes from process ##{Process.pid}..."
   Process.waitall
 ensure
-  puts "Closing socket..."
+  puts 'Closing socket...'
   socket.close
 end

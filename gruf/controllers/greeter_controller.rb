@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'gruf'
-require_relative '../../pb/hello_services_pb'
+require_relative '../../shared/pb/hello_services_pb'
 
 class GreeterController < ::Gruf::Controllers::Base
   bind Hello::Greeter::Service

@@ -9,8 +9,20 @@ dip provision
 # run gruf
 dip gruf
 
-# check GRPC server with grpcurl
+# check GRPC server with k6
 dip k6 gruf
+
+# check GRPC server with grpcurl
+dip grpcurl gruf
+
+# run each GRPC server
+dip up
+
+# check GRPC servers with k6
+dip k6 all
+
+# check GRPC servers with grpcurl
+dip grpcurl all
 ```
 
 ## Griffin
@@ -23,9 +35,6 @@ ruby griffin/server.rb
 ### Results
 
 ```
-GoError: connection error: desc = "transport: error while dialing: dial tcp 192.168.88.158:50051: connect: can't assign requested address"
-Error raised Resource temporarily unavailable - accept(2) would block
-
      ✓ status is OK
      ✓ message is correct
 
@@ -86,8 +95,6 @@ go run main.go
 ### Results
 
 ```
-GoError: connection error: desc = "transport: error while dialing: dial tcp 192.168.88.158:50051: connect: can't assign requested address"
-
      ✓ status is OK
      ✓ message is correct
 
