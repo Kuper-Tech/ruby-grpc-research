@@ -105,6 +105,12 @@ services:
     command: >
       cargo run
 
+  go-grpc:
+    image: go-grpc:0.1
+    build:
+      context: ./go-grpc
+      dockerfile: Dockerfile
+
 volumes:
   bundler_data:
   cargo_data:
