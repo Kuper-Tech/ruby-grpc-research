@@ -79,7 +79,7 @@ services:
 
   client:
     <<: *ruby-app
-    command: bundle exec puma
+    command: bundle exec puma -t 8 -w 8
     environment:
       SERVER_DIR: ./gruf
     volumes:

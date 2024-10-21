@@ -15,7 +15,7 @@ run do |env|
     service: ::Hello::Greeter,
     options: { hostname: "#{grpc_host}:9091" },
     client_options: {
-      interceptors: [GrufClientMetrics.new],
+      interceptors: [GrufClientMetrics.new(grpc_host)],
       timeout: 5
     }
   )

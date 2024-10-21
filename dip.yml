@@ -11,6 +11,8 @@ interaction:
     subcommands:
       gruf:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="gruf"
+      gruf_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="gruf"
       rust-tonic:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="rust-tonic"
       go-grpc:
@@ -21,6 +23,9 @@ interaction:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="nginx"
       grpc:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="grpc"
+      grpc_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="grpc"
+      
       grpc-multi:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="grpc-multi"
       all:
