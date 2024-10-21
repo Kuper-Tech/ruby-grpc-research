@@ -11,8 +11,6 @@ interaction:
     subcommands:
       gruf:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="gruf"
-      gruf_http:
-        command: run /app/k6_test_http.js --env TARGET_HOST="gruf"
       rust-tonic:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="rust-tonic"
       go-grpc:
@@ -25,7 +23,15 @@ interaction:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="grpc"
       grpc_http:
         command: run /app/k6_test_http.js --env TARGET_HOST="grpc"
-      
+      grpc-multi_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="grpc-multi"
+      gruf_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="gruf"
+      griffin_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="griffin"
+      nginx_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="nginx"
+
       grpc-multi:
         command: run /app/k6_test_grpc.js --env TARGET_HOST="grpc-multi"
       all:
@@ -69,7 +75,7 @@ interaction:
           -plaintext -proto hello.proto -import-path /app/shared/proto -d '{"name": "Dmitry"}' grpc:9091 hello.Greeter/SayHello
       grpc-multi:
         command: >
-          -plaintext -proto hello.proto -import-path /app/shared/proto -d '{"name": "Dmitry"}' grpc-multi:9001 hello.Greeter/SayHello
+          -plaintext -proto hello.proto -import-path /app/shared/proto -d '{"name": "Dmitry"}' grpc-multi:9091 hello.Greeter/SayHello
       all:
         command: |
           set -eux

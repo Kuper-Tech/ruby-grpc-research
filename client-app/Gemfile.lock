@@ -107,6 +107,10 @@ GEM
     yabeda-prometheus-mmap (0.4.0)
       prometheus-client-mmap
       yabeda (~> 0.10)
+    yabeda-puma-plugin (0.7.1)
+      json
+      puma
+      yabeda (~> 0.5)
     zeitwerk (2.7.1)
 
 PLATFORMS
@@ -124,6 +128,7 @@ DEPENDENCIES
   rackup
   yabeda-gruf
   yabeda-prometheus-mmap
+  yabeda-puma-plugin
 
 RUBY VERSION
    ruby 3.3.3p89

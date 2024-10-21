@@ -4,10 +4,11 @@ require 'grpc'
 require 'logger'
 require 'socket'
 require_relative '../shared/pb/hello_services_pb'
+require_relative '../shared/fetch_data'
 
-PROCESSES_COUNT = 3
-THREADS_COUNT = 5
-WAIT_QUEUE_SIZE = 32
+PROCESSES_COUNT = 4
+THREADS_COUNT = 8
+WAIT_QUEUE_SIZE = 100
 BIND_IP = '0.0.0.0'
 BIND_PORT = 9091
 BIND_ADDRESS = "#{BIND_IP}:#{BIND_PORT}"
@@ -26,7 +27,7 @@ end
 class HelloImpl < ::Hello::Greeter::Service
   def say_hello(req, _rpc)
     puts "Processing request in process ##{Process.pid}..."
-    sleep 0.1
+    FetchData.call
     ::Hello::HelloReply.new(message: "Hello, #{req.name}!")
   end
 end

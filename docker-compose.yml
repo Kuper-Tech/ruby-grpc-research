@@ -79,7 +79,7 @@ services:
 
   client:
     <<: *ruby-app
-    command: bundle exec puma -t 8 -w 8
+    command: bundle exec puma -t 8 -w 8 -C puma.rb
     environment:
       SERVER_DIR: ./gruf
     volumes:
@@ -139,7 +139,7 @@ services:
     volumes:
       - .:/app:cached
     command: >
-      -plaintext -proto hello.proto -import-path /app/shared/proto -d '{"name": "Dmitry"}' gruf:9001 hello.Greeter/SayHello
+      -plaintext -proto hello.proto -import-path /app/shared/proto -d '{"name": "Dmitry"}' gruf:9091 hello.Greeter/SayHello
 
   rust-tonic:
     image: rust-with-protobuf:0.2

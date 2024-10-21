@@ -1,12 +1,7 @@
 require 'rack'
 require 'gruf'
-# require 'yabeda/gruf'
-require 'yabeda/prometheus/mmap'
 require '/shared/pb/hello_services_pb'
 require_relative 'metrics'
-
-Yabeda.configure!
-Yabeda::Prometheus::Exporter.start_metrics_server!
 
 run do |env|
   grpc_host = env['REQUEST_PATH'].to_s.split('/').last

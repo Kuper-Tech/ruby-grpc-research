@@ -8,6 +8,6 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -o go-app .
 
-EXPOSE 9001
+EXPOSE 9091
 
 CMD ["/app/go-app"]

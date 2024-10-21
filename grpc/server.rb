@@ -3,9 +3,10 @@
 require 'grpc'
 require 'logger'
 require_relative '../shared/pb/hello_services_pb'
+require_relative '../shared/fetch_data'
 
-THREADS_COUNT = 5
-WAIT_QUEUE_SIZE = 32
+THREADS_COUNT = 32
+WAIT_QUEUE_SIZE = 100
 BIND_ADDRESS = '0.0.0.0:9091'
 
 STDOUT.sync = true
@@ -21,7 +22,7 @@ end
 
 class HelloImpl < ::Hello::Greeter::Service
   def say_hello(req, _rpc)
-    sleep 0.1
+    FetchData.call
     ::Hello::HelloReply.new(message: "Hello, #{req.name}!")
   end
 end

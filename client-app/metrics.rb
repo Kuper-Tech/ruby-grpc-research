@@ -26,9 +26,8 @@ class GrufClientMetrics < Gruf::Interceptors::ClientInterceptor
   def call(request_context:)
     status = STATUS_CODES_MAP[::GRPC::Core::StatusCodes::OK]
 
-    Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     result = yield request_context
-    Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
     result
   rescue ::GRPC::BadStatus => e
@@ -38,11 +37,12 @@ class GrufClientMetrics < Gruf::Interceptors::ClientInterceptor
     status = ::GRPC::Core::StatusCodes::INTERNAL
     raise
   ensure
+    value = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
     Yabeda.grpc_client_requests_total.increment({ host: @host, type: request_context.type, method: request_context.method,
-                                                  status: status })
+                                                  status: })
     Yabeda.grpc_client_request_duration.measure(
       { host: @host, type: request_context.type, method: request_context.method,
-        status: status },
+        status: },
       value
     )
   end
