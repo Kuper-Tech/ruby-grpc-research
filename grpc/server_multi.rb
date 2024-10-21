@@ -26,6 +26,7 @@ end
 class HelloImpl < ::Hello::Greeter::Service
   def say_hello(req, _rpc)
     puts "Processing request in process ##{Process.pid}..."
+    sleep 0.1
     ::Hello::HelloReply.new(message: "Hello, #{req.name}!")
   end
 end

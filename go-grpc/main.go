@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	pb "go-grpc/hello"
 	"google.golang.org/grpc"
@@ -41,6 +42,7 @@ type server struct {
 
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(_ context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	time.Sleep(100 * time.Millisecond)
 	return &pb.HelloReply{Message: fmt.Sprintf("Hello, %s!", in.GetName())}, nil
 }
 

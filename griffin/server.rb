@@ -8,6 +8,7 @@ class GreeterServer < Hello::Greeter::Service
   include GrpcKit::Grpc::GenericService
 
   def say_hello(request, _call)
+    sleep 0.1
     Hello::HelloReply.new(message: "Hello, #{request.name}!")
   end
 end
