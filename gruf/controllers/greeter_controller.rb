@@ -7,7 +7,7 @@ class GreeterController < ::Gruf::Controllers::Base
   bind Hello::Greeter::Service
 
   def say_hello
-    # sleep(0.01)
+    sleep 0.1
     Hello::HelloReply.new(message: "Hello, #{request.message.name}!")
   end
 end
