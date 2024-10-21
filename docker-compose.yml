@@ -86,6 +86,8 @@ services:
       - ./client-app:/app:cached
       - ./shared:/shared:cached
       - bundler_data:/usr/local/bundle
+    ports:
+      - "9292:9292"
 
   prometheus:
     image: prom/prometheus:v2.17.1
