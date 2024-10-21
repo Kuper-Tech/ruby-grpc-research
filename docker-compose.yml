@@ -77,6 +77,53 @@ services:
     depends_on:
       - gruf
 
+  client:
+    <<: *ruby-app
+    command: bundle exec puma
+    environment:
+      SERVER_DIR: ./gruf
+    volumes:
+      - ./client-app:/app:cached
+      - ./shared:/shared:cached
+      - bundler_data:/usr/local/bundle
+
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    container_name: prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    expose:
+      - 9090
+    depends_on:
+     - client
+
+  grafana:
+    image: grafana/grafana:6.7.2
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    expose:
+      - 3000
+    ports:
+     - "3000:3000"
+    depends_on:
+     - prometheus
+
   k6:
     image: grafana/k6
     command: run /app/k6_test_grpc.js
@@ -114,3 +161,5 @@ services:
 volumes:
   bundler_data:
   cargo_data:
+  prometheus_data:
+  grafana_data:
