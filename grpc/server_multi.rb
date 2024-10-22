@@ -3,6 +3,7 @@
 require 'grpc'
 require 'logger'
 require 'socket'
+require_relative './grpc_monkey_patch.rb'
 require_relative '../shared/pb/hello_services_pb'
 require_relative '../shared/fetch_data'
 
