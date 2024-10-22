@@ -18,10 +18,8 @@ Griffin::Server.configure do |c|
   c.bind '0.0.0.0'
   c.port 9091
 
-  # runs in single mode
   c.workers 4
-  c.pool_size 20, 20
-  c.connection_size 8, 8
+  c.pool_size 8, 8
 
   c.services GreeterServer.new
 end
