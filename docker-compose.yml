@@ -1,3 +1,13 @@
+x-app-resources: &x-app-resources
+  deploy:
+    resources:
+      reservations:
+        cpus: '0.25'
+        memory: 256M
+      limits:
+        cpus: '0.25'
+        memory: 256M
+
 x-app-service-template: &ruby-app
   image: ruby-with-nghttp2:0.1
   build:
@@ -16,24 +26,28 @@ x-app-service-template: &ruby-app
 
 services:
   ruby:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command: bash
     volumes:
       - bundler_data:/usr/local/bundle
       - .:/app:cached
 
   gruf:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command: bundle exec ruby server.rb
-    environment:
-      SERVER_DIR: ./gruf
     volumes:
       - ./gruf:/app:cached
       - ./shared:/shared:cached
       - bundler_data:/usr/local/bundle
 
   griffin:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command:  bundle exec ruby server.rb
     volumes:
       - ./griffin:/app:cached
@@ -41,7 +55,9 @@ services:
       - bundler_data:/usr/local/bundle
 
   grpc:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command: bundle exec ruby server.rb
     volumes:
       - ./grpc:/app:cached
@@ -49,7 +65,9 @@ services:
       - bundler_data:/usr/local/bundle
 
   grpc-multi:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command: bundle exec ruby server_multi.rb
     volumes:
       - ./grpc:/app:cached
@@ -57,7 +75,9 @@ services:
       - bundler_data:/usr/local/bundle
 
   falcon:
-    <<: *ruby-app
+    <<:
+      - *ruby-app
+      - *x-app-resources
     command: bundle exec falcon host
     volumes:
       - ./falcon:/app:cached
@@ -80,8 +100,6 @@ services:
   client:
     <<: *ruby-app
     command: bundle exec puma -t 8 -w 8 -C puma.rb
-    environment:
-      SERVER_DIR: ./gruf
     volumes:
       - ./client-app:/app:cached
       - ./shared:/shared:cached
