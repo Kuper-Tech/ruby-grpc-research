@@ -17,7 +17,7 @@ x-app-service-template: &ruby-app
     HISTFILE: /app/tmp/.bash_history
     BUNDLE_PATH: /usr/local/bundle
     BUNDLE_CONFIG: /app/.bundle/config
-    prometheus_multiproc_dir: ./tmp
+    prometheus_multiproc_dir: /tmp
   stdin_open: true
   tty: true
   working_dir: /app

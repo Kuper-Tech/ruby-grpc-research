@@ -3,7 +3,7 @@ use tonic::{transport::Server, Request, Response, Status};
 use hello::greeter_server::{Greeter, GreeterServer};
 use hello::{HelloReply, HelloRequest};
 
-use std::{thread, time};
+// use std::{thread, time};
 
 pub mod hello {
     include!("hello.rs");

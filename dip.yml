@@ -27,6 +27,8 @@ interaction:
         command: run /app/k6_test_http.js --env TARGET_HOST="grpc-multi"
       gruf_http:
         command: run /app/k6_test_http.js --env TARGET_HOST="gruf"
+      rust-tonic_http:
+        command: run /app/k6_test_http.js --env TARGET_HOST="rust-tonic"
       griffin_http:
         command: run /app/k6_test_http.js --env TARGET_HOST="griffin"
       nginx_http:
