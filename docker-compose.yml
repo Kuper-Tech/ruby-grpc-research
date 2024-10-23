@@ -2,11 +2,11 @@ x-app-resources: &x-app-resources
   deploy:
     resources:
       reservations:
-        cpus: '0.25'
-        memory: 256M
+        cpus: '1'
+        memory: 512M
       limits:
-        cpus: '0.25'
-        memory: 256M
+        cpus: '1'
+        memory: 512M
 
 x-app-service-template: &ruby-app
   image: ruby-with-nghttp2:0.1
