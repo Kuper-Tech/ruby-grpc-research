@@ -59,10 +59,10 @@ dip compose exec client curl http://localhost:9394/metrics
 
 ```
 # runs k6 stress test for any GRPC-implementation
-dip k6 gruf
-dip k6 griffin
-dip k6 grpc
-dip k6 nginx
+dip k6 gruf_http
+dip k6 griffin_http
+dip k6 grpc_http
+dip k6 nginx_http
 ```
 
 ## Results
