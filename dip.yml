@@ -133,6 +133,7 @@ interaction:
           dip compose run griffin bundle install
           dip compose run grpc bundle install
           dip compose run falcon bundle install
+          dip compose run client bundle install
 
 provision:
   - dip compose down --volumes --remove-orphans
